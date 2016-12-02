@@ -1,4 +1,5 @@
 var RecordStore = require("../record_store");
+var Record = require("../record");
 var assert = require("assert");
 
 describe ("RecordStore", function() {
@@ -7,6 +8,36 @@ describe ("RecordStore", function() {
     name: "Vinyl Villains",
     city: "Edinburgh"
   });
+
+  var recordOne = new Record({
+    artist: "Miles Davis", 
+    title: "Blue Moods", 
+    price: 19.99
+  });
+  
+  var recordTwo = new Record({
+    artist: "Dave Brubeck",
+    title: "Take Five",
+    price: 32.90
+  });
+
+  var recordThree = new Record({
+    artist: "Sonny Rollins",
+    title: "Now's the Time",
+    price: 30.00
+  });
+
+  var recordFour = new Record({
+    artist: "Nina Simone",
+    title: "Silk & Soul",
+    price: 28.17
+  });
+
+
+  beforeEach(function() {
+    storeOne.inventory = [];
+  });
+
 
   it("should have a name", function() {
     assert.equal(storeOne.name, "Vinyl Villains");
@@ -25,7 +56,14 @@ describe ("RecordStore", function() {
   }); 
 
   it("should be possible to add a record to inventory", function() {
-    assert.equal();
+    storeOne.addRecord(recordOne);
+    assert.deepEqual(recordOne, storeOne.inventory[0]);
+  }); 
+
+  it("should be possible to add multiples of a record to inventory", function() {
+    storeOne.addRecordMultiple(recordOne, 5);
+    assert.equal(5, storeOne.inventory.length);
+    assert.deepEqual(recordOne, storeOne.inventory[4]);
   }); 
 
   it("should be possible to add multiple records to inventory", function() {
