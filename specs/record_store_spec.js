@@ -135,20 +135,20 @@ describe ("RecordStore", function() {
     assert.equal(storeOne.bankBalance, 5059.97);
   }); 
 
-  it("should be possible to find value of inventory", function() {
+  it("should be possible to find value of inventory at selling price", function() {
     storeOne.addRecordsFromList(recordsList);
-    assert.equal(storeOne.valueInventory(), 183.94);
+    assert.equal(storeOne.valueInventorySale(), 183.94);
   }); 
 
   it("should be possible to report on store finances; printout-style", function() {
     storeOne.addRecordsFromList(recordsList);
-    var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Finances\n--------------------------------------\nValue of inventory: £183.94\nCash: £5000\nTotal: £5183.94";
+    var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Finances\n--------------------------------------\nValue of inventory at selling prices: £183.94\nCash: £5000\nTotal: £5183.94";
     assert.equal(storeOne.financeReport(), expected);
   }); 
 
   it("should be possible to report on store finances; JSON", function() {
     storeOne.addRecordsFromList(recordsList);
-    var expected = '{"valueOfInventory":183.94,"cash":5000,"total":5183.94}';
+    var expected = '{"valueOfInventorySale":183.94,"cash":5000,"total":5183.94}';
     assert.equal(storeOne.financeReportJSON(), expected);
   }); 
 
