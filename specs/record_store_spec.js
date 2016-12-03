@@ -126,7 +126,15 @@ describe ("RecordStore", function() {
   });
 
   it("should increase bank balance on selling a record", function() {
-    assert.equal();
+    storeOne.addRecordsFromList(recordsList);
+    storeOne.sale(recordOne, 3);
+    assert.equal(storeOne.bankBalance, 5059.97);
+  }); 
+
+  it("should be possible to find value of inventory", function() {
+    storeOne.addRecordsFromList(recordsList);
+    assert.equal(storeOne.valueInventory(), 183.94);
+    console.log(storeOne.valueInventory());
   }); 
 
   it("should be possible to report on store finances", function() {

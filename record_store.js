@@ -75,6 +75,20 @@ RecordStore.prototype = {
     if ( this.inventory[index][1].quantity <= 0 ) {
       this.inventory.splice(index, 1);
     };
+  }, 
+
+  valueInventory: function() {
+
+    var values = this.inventory.map( function(listing) {
+      return listing[0].price * listing[1].quantity;
+    });
+
+    var totalValue = values.reduce(function(accumulator, value) {
+      return accumulator += value;      
+    });
+
+    return totalValue;
+
   }
 
 };
