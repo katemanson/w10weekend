@@ -84,7 +84,7 @@ describe ("RecordStore", function() {
     assert.deepEqual(recordFour, storeOne.inventory[3][0]);
   }); 
 
-  it("should be possible to list the inventory; printout style", function() {
+  it("should be possible to list the inventory; printout-style", function() {
     storeOne.addRecordsFromList(recordsList);
     var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Inventory\n--------------------------------------\n\nArtist: Miles Davis\nTitle: Blue Moods\nPrice: £19.99\nQuantity: 3\n\nArtist: Dave Brubeck\nTitle: Take Five\nPrice: £32.9\nQuantity: 2\n\nArtist: Sonny Rollins\nTitle: Now's the Time\nPrice: £30\nQuantity: 1\n\nArtist: Nina Simone\nTitle: Silk & Soul\nPrice: £28.17\nQuantity: 1";
     assert.equal(storeOne.listInventory(), expected);
@@ -134,13 +134,18 @@ describe ("RecordStore", function() {
   it("should be possible to find value of inventory", function() {
     storeOne.addRecordsFromList(recordsList);
     assert.equal(storeOne.valueInventory(), 183.94);
-    console.log(storeOne.valueInventory());
   }); 
 
-  it("should be possible to report on store finances", function() {
-    assert.equal();
+  it("should be possible to report on store finances; printout-style", function() {
+    storeOne.addRecordsFromList(recordsList);
+    var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Finances\n--------------------------------------\nValue of inventory: £183.94\nCash: £5000\nTotal: £5183.94";
+    assert.equal(storeOne.financeReport(), expected);
   }); 
 
-
+  it("should be possible to report on store finances; JSON", function() {
+    storeOne.addRecordsFromList(recordsList);
+    var expected = '{"valueOfInventory":183.94,"cash":5000,"total":5183.94}';
+    assert.equal(storeOne.financeReportJSON(), expected);
+  }); 
 
 });

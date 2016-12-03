@@ -83,12 +83,29 @@ RecordStore.prototype = {
       return listing[0].price * listing[1].quantity;
     });
 
-    var totalValue = values.reduce(function(accumulator, value) {
-      return accumulator += value;      
+    var totalValue = values.reduce(function(runningTotal, value) {
+      return runningTotal += value;      
     });
 
     return totalValue;
+  },
 
+  financeReport: function() {
+
+    var total = this.valueInventory() + this.bankBalance;
+
+    return "--------------------------------------\n " + this.name + ", " + this.city + ": Finances\n--------------------------------------" + "\nValue of inventory: £" + this.valueInventory() + "\nCash: £" + this.bankBalance + "\nTotal: £" + total; 
+  }, 
+
+  financeReportJSON: function() {
+
+    var finances = {
+      valueOfInventory: this.valueInventory(),
+      cash: this.bankBalance,
+      total: this.valueInventory() + this.bankBalance
+    };
+
+    return JSON.stringify(finances);
   }
 
 };
