@@ -6,30 +6,34 @@ describe ("RecordStore", function() {
 
   var storeOne = new RecordStore({
     name: "Vinyl Villains",
-    city: "Edinburgh"
+    address: "Edinburgh"
   });
 
   var recordOne = new Record({
     artist: "Miles Davis", 
     title: "Blue Moods", 
+    cost: 9.49,
     price: 19.99
   });
   
   var recordTwo = new Record({
     artist: "Dave Brubeck",
     title: "Take Five",
+    cost: 24.20,
     price: 32.90
   });
 
   var recordThree = new Record({
     artist: "Sonny Rollins",
     title: "Now's the Time",
+    cost: 20.00,
     price: 30.00
   });
 
   var recordFour = new Record({
     artist: "Nina Simone",
     title: "Silk & Soul",
+    cost: 18.99,
     price: 28.17
   });
 
@@ -39,7 +43,7 @@ describe ("RecordStore", function() {
   beforeEach(function() {
     storeOne.inventory = [];
     storeOne.bankBalance = 5000;
-    // ?recordsList below used in tests for sale method; quantity changes between tests unless reset by including here, in beforeEach; not sure why??
+    // ?recordsList below used in tests for sale method, entered new each time; quantity changes between tests unless reset by including here, in beforeEach; not sure why??
     recordsList = [[recordOne, {quantity: 3}], [recordTwo, {quantity: 2}], [recordThree, {quantity: 1}], [recordFour, {quantity: 1}]];
   });
 
@@ -48,8 +52,8 @@ describe ("RecordStore", function() {
     assert.equal(storeOne.name, "Vinyl Villains");
   });
 
-  it("should have a city", function() {
-    assert.equal(storeOne.city, "Edinburgh");
+  it("should have an address", function() {
+    assert.equal(storeOne.address, "Edinburgh");
   });
 
   it("should have an inventory that starts empty", function() {
@@ -86,13 +90,13 @@ describe ("RecordStore", function() {
 
   it("should be possible to list the inventory; printout-style", function() {
     storeOne.addRecordsFromList(recordsList);
-    var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Inventory\n--------------------------------------\n\nArtist: Miles Davis\nTitle: Blue Moods\nPrice: £19.99\nQuantity: 3\n\nArtist: Dave Brubeck\nTitle: Take Five\nPrice: £32.9\nQuantity: 2\n\nArtist: Sonny Rollins\nTitle: Now's the Time\nPrice: £30\nQuantity: 1\n\nArtist: Nina Simone\nTitle: Silk & Soul\nPrice: £28.17\nQuantity: 1";
+    var expected = "--------------------------------------\n Vinyl Villains, Edinburgh: Inventory\n--------------------------------------\n\nArtist: Miles Davis\nTitle: Blue Moods\nCost: £9.49\nPrice: £19.99\nQuantity: 3\n\nArtist: Dave Brubeck\nTitle: Take Five\nCost: £24.2\nPrice: £32.9\nQuantity: 2\n\nArtist: Sonny Rollins\nTitle: Now's the Time\nCost: £20\nPrice: £30\nQuantity: 1\n\nArtist: Nina Simone\nTitle: Silk & Soul\nCost: £18.99\nPrice: £28.17\nQuantity: 1";
     assert.equal(storeOne.listInventory(), expected);
   }); 
 
   it("should be possible to list the inventory; JSON", function() {
     storeOne.addRecordsFromList(recordsList);
-    var expected = '[[{"artist":"Miles Davis","title":"Blue Moods","price":19.99},{"quantity":3}],[{"artist":"Dave Brubeck","title":"Take Five","price":32.9},{"quantity":2}],[{"artist":"Sonny Rollins","title":"Now\'s the Time","price":30},{"quantity":1}],[{"artist":"Nina Simone","title":"Silk & Soul","price":28.17},{"quantity":1}]]';
+    var expected = '[[{"artist":"Miles Davis","title":"Blue Moods","cost":9.49,"price":19.99},{"quantity":3}],[{"artist":"Dave Brubeck","title":"Take Five","cost":24.2,"price":32.9},{"quantity":2}],[{"artist":"Sonny Rollins","title":"Now\'s the Time","cost":20,"price":30},{"quantity":1}],[{"artist":"Nina Simone","title":"Silk & Soul","cost":18.99,"price":28.17},{"quantity":1}]]';
     assert.equal(storeOne.listInventoryJSON(), expected);
   }); 
 
